@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--木质料筒-->
+<robot
+  name="bucket">
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="8.4484E-18 4.5027E-34 0.0068867"
+        rpy="0 0 0" />
+      <mass
+        value="0.030343" />
+      <inertia
+        ixx="2.2203E-05"
+        ixy="8.9098E-38"
+        ixz="2.1384E-22"
+        iyy="2.2203E-05"
+        iyz="2.7152E-38"
+        izz="3.2265E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/bucket.STL" />
+      </geometry>
+      <material
+        name="wood">
+        <color
+          rgba="1 0.5 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/bucket.STL" />
+      </geometry>
+    </collision>
+  </link>
+  
+  <!--添加世界坐标系到机械臂基坐标系的空间变换-->
+  <link name="world"/>
+  <joint name="world_joint" type="fixed">
+      <parent link="world"/>
+      <child link="base_link"/>
+      <origin rpy="0.0 0.0 0.0" xyz="0.0 -0.14 0.01"/>
+  </joint>
+</robot>
