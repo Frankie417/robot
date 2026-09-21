@@ -1,0 +1,338 @@
+<?xml version="1.0"?>
+<robot name="marm" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <!-- Industrial palette inspired by UR, Franka, OpenMANIPULATOR and KUKA. -->
+    <material name="Graphite"><color rgba="0.055 0.070 0.085 1"/></material>
+    <material name="Gunmetal"><color rgba="0.16 0.19 0.22 1"/></material>
+    <material name="PearlWhite"><color rgba="0.88 0.91 0.93 1"/></material>
+    <material name="Aluminium"><color rgba="0.52 0.58 0.62 1"/></material>
+    <material name="OceanBlue"><color rgba="0.02 0.30 0.52 1"/></material>
+    <material name="ElectricCyan"><color rgba="0.00 0.72 0.82 1"/></material>
+    <material name="SafetyOrange"><color rgba="1.00 0.30 0.035 1"/></material>
+    <material name="SignalYellow"><color rgba="1.00 0.73 0.06 1"/></material>
+    <material name="RubberBlack"><color rgba="0.018 0.022 0.026 1"/></material>
+
+    <!-- Constants -->
+    <xacro:property name="M_PI" value="3.14159"/>
+
+    <!-- link1 properties -->
+    <xacro:property name="link0_radius" value="0.05" />
+    <xacro:property name="link0_length" value="0.04" />
+    <xacro:property name="link0_mass" value="1" />
+
+    <!-- link1 properties -->
+    <xacro:property name="link1_radius" value="0.03" />
+    <xacro:property name="link1_length" value="0.10" />
+    <xacro:property name="link1_mass" value="1" />
+
+    <!-- link2 properties -->
+    <xacro:property name="link2_radius" value="0.03" />
+    <xacro:property name="link2_length" value="0.14" />
+    <xacro:property name="link2_mass" value="0.8" />
+
+    <!-- link3 properties -->
+    <xacro:property name="link3_radius" value="0.03" />
+    <xacro:property name="link3_length" value="0.15" />
+    <xacro:property name="link3_mass" value="0.8" />
+
+    <!-- link4 properties -->
+    <xacro:property name="link4_radius" value="0.025" />
+    <xacro:property name="link4_length" value="0.06" />
+    <xacro:property name="link4_mass" value="0.7" />
+
+    <!-- link5 properties -->
+    <xacro:property name="link5_radius" value="0.03" />
+    <xacro:property name="link5_length" value="0.06" />
+    <xacro:property name="link5_mass" value="0.7" />
+
+    <!-- link6 properties -->
+    <xacro:property name="link6_radius" value="0.04" />
+    <xacro:property name="link6_length" value="0.02" />
+    <xacro:property name="link6_mass" value="0.6" />
+
+    <!-- gripper -->
+    <xacro:property name="gripper_length" value="0.03" />
+    <xacro:property name="gripper_width" value="0.01" />
+    <xacro:property name="gripper_height" value="0.06" />
+    <xacro:property name="gripper_mass" value="0.5" />
+
+    <!-- Gripper frame -->
+    <xacro:property name="grasp_frame_radius" value="0.001" />
+
+    <!-- Macro for inertia matrix -->
+    <xacro:macro name="cylinder_inertial_matrix" params="m r h">
+        <inertial>
+            <mass value="${m}" />
+            <inertia ixx="${m*(3*r*r+h*h)/12}" ixy = "0" ixz = "0"
+                iyy="${m*(3*r*r+h*h)/12}" iyz = "0"
+                izz="${m*r*r/2}" /> 
+        </inertial>
+    </xacro:macro>
+
+    <xacro:macro name="box_inertial_matrix" params="m w h d">
+        <inertial>
+            <mass value="${m}" />
+            <inertia ixx="${m*(h*h+d*d)/12}" ixy = "0" ixz = "0"
+                iyy="${m*(w*w+d*d)/12}" iyz = "0"
+                izz="${m*(w*w+h*h)/12}" /> 
+        </inertial>
+    </xacro:macro>
+
+    <!-- Reusable multi-part visual primitives keep the model portable and mesh-free. -->
+    <xacro:macro name="visual_cylinder" params="xyz rpy radius length material">
+        <visual>
+            <origin xyz="${xyz}" rpy="${rpy}"/>
+            <geometry><cylinder radius="${radius}" length="${length}"/></geometry>
+            <material name="${material}"/>
+        </visual>
+    </xacro:macro>
+
+    <xacro:macro name="visual_box" params="xyz rpy size material">
+        <visual>
+            <origin xyz="${xyz}" rpy="${rpy}"/>
+            <geometry><box size="${size}"/></geometry>
+            <material name="${material}"/>
+        </visual>
+    </xacro:macro>
+
+    <xacro:macro name="visual_sphere" params="xyz radius material">
+        <visual>
+            <origin xyz="${xyz}" rpy="0 0 0"/>
+            <geometry><sphere radius="${radius}"/></geometry>
+            <material name="${material}"/>
+        </visual>
+    </xacro:macro>
+
+    <!-- /////////////////////////////////////   ARM BASE    ////////////////////////////////////////////// -->
+    <link name="base_link">
+        <xacro:visual_cylinder xyz="0 0 -0.006" rpy="0 0 0" radius="0.078" length="0.012" material="RubberBlack"/>
+        <xacro:visual_cylinder xyz="0 0 0.004" rpy="0 0 0" radius="0.072" length="0.014" material="Gunmetal"/>
+        <xacro:visual_cylinder xyz="0 0 0.014" rpy="0 0 0" radius="0.064" length="0.010" material="Aluminium"/>
+        <xacro:visual_cylinder xyz="0 0 0.020" rpy="0 0 0" radius="0.052" length="0.004" material="ElectricCyan"/>
+    </link>
+
+    <joint name="base_joint" type="fixed">
+        <origin xyz="0 0 ${link0_length/2}" rpy="0 0 0" />        
+        <parent link="base_link"/>
+        <child link="link0" />
+    </joint>
+
+    <!-- /////////////////////////////////////    LINK0    ////////////////////////////////////////////// -->
+    <link name="link0">
+        <xacro:visual_cylinder xyz="0 0 0" rpy="0 0 0" radius="0.043" length="0.032" material="PearlWhite"/>
+        <xacro:visual_cylinder xyz="0 0 -0.016" rpy="0 0 0" radius="0.050" length="0.008" material="Graphite"/>
+        <xacro:visual_cylinder xyz="0 0 0.016" rpy="0 0 0" radius="0.050" length="0.008" material="OceanBlue"/>
+        <xacro:visual_box xyz="0 -0.043 0" rpy="0 0 0" size="0.028 0.006 0.020" material="SafetyOrange"/>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <cylinder radius="${link0_radius}" length="${link0_length}"/>
+            </geometry>
+        </collision>
+        <cylinder_inertial_matrix m="${link0_mass}" r="${link0_radius}" h="${link0_length}"/>
+    </link>
+
+    <joint name="joint1" type="revolute">
+        <parent link="link0"/>
+        <child link="link1"/>
+        <origin xyz="0 0 ${link0_length/2}" rpy="0 ${M_PI/2} 0" />
+        <axis xyz="-1 0 0" />
+        <limit effort="300" velocity="1" lower="${-M_PI}" upper="${M_PI}"/>
+    </joint>
+
+    <!-- /////////////////////////////////////   LINK1  ////////////////////////////////////////////// -->
+    <link name="link1" >
+        <xacro:visual_cylinder xyz="-${link1_length/2} 0 0" rpy="0 ${M_PI/2} 0" radius="0.027" length="0.078" material="OceanBlue"/>
+        <xacro:visual_cylinder xyz="-0.010 0 0" rpy="0 ${M_PI/2} 0" radius="0.038" length="0.020" material="Gunmetal"/>
+        <xacro:visual_cylinder xyz="-0.090 0 0" rpy="0 ${M_PI/2} 0" radius="0.035" length="0.020" material="Aluminium"/>
+        <xacro:visual_box xyz="-${link1_length/2} -0.026 0.008" rpy="0 0 0" size="0.058 0.008 0.018" material="ElectricCyan"/>
+        <xacro:visual_box xyz="-${link1_length/2} 0.026 -0.008" rpy="0 0 0" size="0.042 0.006 0.012" material="SafetyOrange"/>
+        <collision>
+            <origin xyz="-${link1_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+            <geometry>
+                <cylinder radius="${link1_radius}" length="${link1_length}"/>
+            </geometry>
+        </collision>
+        <cylinder_inertial_matrix m="${link1_mass}" r="${link1_radius}" h="${link1_length}"/>
+    </link>
+
+    <joint name="joint2" type="revolute">
+        <parent link="link1"/>
+        <child link="link2"/>
+        <origin xyz="-${link1_length} 0 0.0" rpy="-${M_PI/2} 0 ${M_PI/2}" />
+        <axis xyz="1 0 0" />
+        <limit effort="300" velocity="1" lower="${-M_PI}" upper="${M_PI}" />
+    </joint>
+
+    <!-- ///////////////////////////////////////   LINK2  ////////////////////////////////////////////// -->
+    <link name="link2" >
+        <xacro:visual_cylinder xyz="0 0 ${link2_length/2}" rpy="0 0 0" radius="0.026" length="0.112" material="PearlWhite"/>
+        <xacro:visual_cylinder xyz="0 0 0.012" rpy="0 0 0" radius="0.036" length="0.024" material="Gunmetal"/>
+        <xacro:visual_cylinder xyz="0 0 0.128" rpy="0 0 0" radius="0.036" length="0.024" material="OceanBlue"/>
+        <xacro:visual_box xyz="0 -0.027 ${link2_length/2}" rpy="0 0 0" size="0.036 0.009 0.076" material="Aluminium"/>
+        <xacro:visual_box xyz="0 -0.033 ${link2_length/2}" rpy="0 0 0" size="0.020 0.004 0.052" material="SafetyOrange"/>
+
+        <collision>
+            <origin xyz="0 0 ${link2_length/2}" rpy="0 0 0" />
+            <geometry>
+                <cylinder radius="${link2_radius}" length="${link2_length}"/>
+            </geometry>
+        </collision>
+        <cylinder_inertial_matrix m="${link2_mass}" r="${link2_radius}" h="${link2_length}"/>
+    </link>
+
+    <joint name="joint3" type="revolute">
+        <parent link="link2"/>
+        <child link="link3"/>
+        <origin xyz="0 0 ${link2_length}" rpy="0 ${M_PI} 0" />
+        <axis xyz="-1 0 0" />
+        <limit effort="300" velocity="1" lower="${-M_PI}" upper="${M_PI}" />
+    </joint>
+
+    <!-- /////////////////////////////////   LINK3  ///////////////////////////////////////////////////// -->
+    <link name="link3" >
+        <xacro:visual_cylinder xyz="0 0 -${link3_length/2}" rpy="0 0 0" radius="0.026" length="0.120" material="OceanBlue"/>
+        <xacro:visual_cylinder xyz="0 0 -0.012" rpy="0 0 0" radius="0.036" length="0.024" material="Aluminium"/>
+        <xacro:visual_cylinder xyz="0 0 -0.138" rpy="0 0 0" radius="0.036" length="0.024" material="Graphite"/>
+        <xacro:visual_box xyz="0 0.027 -${link3_length/2}" rpy="0 0 0" size="0.036 0.009 0.082" material="Gunmetal"/>
+        <xacro:visual_box xyz="0 0.033 -${link3_length/2}" rpy="0 0 0" size="0.018 0.004 0.060" material="SignalYellow"/>
+        <collision>
+            <origin xyz="0 0 -${link3_length/2}" rpy="0 0 0" />
+            <geometry>
+                <cylinder radius="${link3_radius}" length="${link3_length}"/>
+            </geometry>
+        </collision>
+        <cylinder_inertial_matrix m="${link3_mass}" r="${link3_radius}" h="${link3_length}"/>
+    </link>
+
+    <joint name="joint4" type="revolute">
+        <parent link="link3"/>
+        <child link="link4"/>
+        <origin xyz="0.0 0.0 -${link3_length}" rpy="0 ${M_PI/2} ${M_PI}" />
+        <axis xyz="1 0 0" />
+        <limit effort="300" velocity="1" lower="${-M_PI}" upper="${M_PI}" />
+    </joint>
+
+    <!-- ///////////////////////////////////   LINK4  //////////////////////////////////////////////// -->
+    <link name="link4" >
+        <xacro:visual_cylinder xyz="${link4_length/2} 0 0" rpy="0 ${M_PI/2} 0" radius="0.024" length="0.042" material="Gunmetal"/>
+        <xacro:visual_cylinder xyz="0.010 0 0" rpy="0 ${M_PI/2} 0" radius="0.033" length="0.020" material="SafetyOrange"/>
+        <xacro:visual_cylinder xyz="0.050 0 0" rpy="0 ${M_PI/2} 0" radius="0.031" length="0.020" material="Aluminium"/>
+        <xacro:visual_box xyz="${link4_length/2} -0.024 0" rpy="0 0 0" size="0.026 0.006 0.018" material="ElectricCyan"/>
+        <collision>
+            <origin xyz="${link4_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+            <geometry>
+                <cylinder radius="${link4_radius}" length="${link4_length}"/>
+            </geometry>
+        </collision>
+        <cylinder_inertial_matrix m="${link4_mass}" r="${link4_radius}" h="${link4_length}"/>
+    </link>
+
+    <joint name="joint5" type="revolute">
+        <parent link="link4"/>
+        <child link="link5"/>
+        <origin xyz="${link4_length} 0.0 0.0" rpy="0 ${M_PI/2} 0" />
+        <axis xyz="1 0 0" />
+        <limit effort="300" velocity="1" lower="${-M_PI}" upper="${M_PI}" />
+    </joint>
+
+    <!-- //////////////////////////////////   LINK5  ///////////////////////////////////////////////// -->
+    <link name="link5">
+        <xacro:visual_cylinder xyz="0 0 ${link5_length/2}" rpy="0 0 0" radius="0.025" length="0.042" material="PearlWhite"/>
+        <xacro:visual_cylinder xyz="0 0 0.010" rpy="0 0 0" radius="0.033" length="0.020" material="OceanBlue"/>
+        <xacro:visual_cylinder xyz="0 0 0.050" rpy="0 0 0" radius="0.033" length="0.020" material="Graphite"/>
+        <xacro:visual_box xyz="0 -0.025 ${link5_length/2}" rpy="0 0 0" size="0.018 0.006 0.026" material="SafetyOrange"/>
+        <collision>
+            <origin xyz="0 0 ${link4_length/2} " rpy="0 0 0" />
+            <geometry>
+                <cylinder radius="${link5_radius}" length="${link5_length}"/>
+            </geometry>
+        </collision>
+        <cylinder_inertial_matrix m="${link5_mass}" r="${link5_radius}" h="${link5_length}"/>
+    </link>
+
+    <joint name="joint6" type="revolute">
+        <parent link="link5"/>
+        <child link="link6"/>
+        <origin xyz="0 0 ${link4_length}" rpy="${1.5*M_PI} -${M_PI/2} 0" />
+        <axis xyz="1 0 0" />
+        <limit effort="300" velocity="1" lower="${-2*M_PI}" upper="${2*M_PI}" />
+    </joint>
+
+    <!-- ////////////////////////////////   LINK6  ///////////////////////////////////////////////// -->
+    <link name="link6">
+        <xacro:visual_cylinder xyz="${link6_length/2} 0 0" rpy="0 ${M_PI/2} 0" radius="0.038" length="${link6_length}" material="OceanBlue"/>
+        <xacro:visual_cylinder xyz="0.004 0 0" rpy="0 ${M_PI/2} 0" radius="0.044" length="0.008" material="Aluminium"/>
+        <xacro:visual_cylinder xyz="0.018 0 0" rpy="0 ${M_PI/2} 0" radius="0.044" length="0.008" material="Graphite"/>
+        <xacro:visual_box xyz="0.027 0 0" rpy="0 0 0" size="0.018 0.072 0.058" material="Gunmetal"/>
+        <xacro:visual_box xyz="0.037 0 0.025" rpy="0 0 0" size="0.018 0.050 0.008" material="SafetyOrange"/>
+        <collision>
+            <origin xyz="${link6_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+            <geometry>
+                <cylinder radius="${link6_radius}" length="${link6_length}"/>
+            </geometry>
+        </collision>
+        <cylinder_inertial_matrix m="${link6_mass}" r="${link6_radius}" h="${link6_length}"/>
+    </link>
+
+    <joint name="finger_joint1" type="prismatic">
+        <parent link="link6"/>
+        <child link="gripper_finger_link1"/>
+        <origin xyz="${link6_length} -0.03 0" rpy="0 0 0" />
+        <axis xyz="0 1 0" />
+        <limit effort="100" lower="0" upper="0.06" velocity="0.02"/>
+    </joint>
+
+    <!-- //////////////////////////////////////   gripper   ////////////////////////////////////////////// -->
+    <!-- LEFT GRIPPER AFT LINK -->
+    <link name="gripper_finger_link1">
+        <!-- Visual-only parallel-jaw finger: carriage, jaw, inner rubber pad and fastener. -->
+        <xacro:visual_box xyz="0.014 0 0" rpy="0 0 0" size="0.028 0.022 0.036" material="Gunmetal"/>
+        <xacro:visual_box xyz="0.041 0 0" rpy="0 0 0" size="0.034 0.018 0.032" material="PearlWhite"/>
+        <xacro:visual_box xyz="0.064 0 0" rpy="0 0 0" size="0.022 0.018 0.044" material="OceanBlue"/>
+        <xacro:visual_box xyz="0.064 0.012 0" rpy="0 0 0" size="0.034 0.006 0.030" material="RubberBlack"/>
+        <xacro:visual_box xyz="0.041 0 -0.018" rpy="0 0 0" size="0.030 0.020 0.004" material="ElectricCyan"/>
+        <xacro:visual_cylinder xyz="0.014 -0.012 0.012" rpy="${M_PI/2} 0 0" radius="0.004" length="0.004" material="SafetyOrange"/>
+        <collision>
+            <origin xyz="${gripper_height/2} 0 0" rpy="0 ${M_PI/2} 0" />
+            <geometry>
+                <box size="${gripper_length} ${gripper_width} ${gripper_height}" />
+            </geometry>
+        </collision>
+        <box_inertial_matrix m="${gripper_mass}" w="${gripper_width}" h="${gripper_height}" d="${gripper_length}"/>
+    </link>
+
+    <joint name="finger_joint2" type="fixed">
+        <parent link="link6"/>
+        <child link="gripper_finger_link2"/>
+        <origin xyz="${link6_length} 0.03 0" rpy="0 0 0" />
+    </joint>
+
+    <!-- RIGHT GRIPPER AFT LINK -->
+    <link name="gripper_finger_link2">
+        <!-- Mirrored visual-only parallel-jaw finger; collision and finger joint stay unchanged. -->
+        <xacro:visual_box xyz="0.014 0 0" rpy="0 0 0" size="0.028 0.022 0.036" material="Gunmetal"/>
+        <xacro:visual_box xyz="0.041 0 0" rpy="0 0 0" size="0.034 0.018 0.032" material="PearlWhite"/>
+        <xacro:visual_box xyz="0.064 0 0" rpy="0 0 0" size="0.022 0.018 0.044" material="OceanBlue"/>
+        <xacro:visual_box xyz="0.064 -0.012 0" rpy="0 0 0" size="0.034 0.006 0.030" material="RubberBlack"/>
+        <xacro:visual_box xyz="0.041 0 -0.018" rpy="0 0 0" size="0.030 0.020 0.004" material="ElectricCyan"/>
+        <xacro:visual_cylinder xyz="0.014 0.012 0.012" rpy="${M_PI/2} 0 0" radius="0.004" length="0.004" material="SafetyOrange"/>
+        <collision>
+            <origin xyz="${gripper_height/2} 0 0" rpy="0 ${M_PI/2} 0" />
+            <geometry>
+                <box size="${gripper_length} ${gripper_width} ${gripper_height}" />
+            </geometry>
+        </collision>
+        <box_inertial_matrix m="${gripper_mass}" w="${gripper_width}" h="${gripper_height}" d="${gripper_length}"/>
+    </link>
+
+    <!-- Grasping frame -->
+    <link name="grasping_frame"/>
+
+    <joint name="grasping_frame_joint" type="fixed">
+        <parent link="link6"/>
+        <child link="grasping_frame"/>
+        <origin xyz="${gripper_height} 0 0" rpy="0 0 0"/>
+    </joint>
+
+</robot>

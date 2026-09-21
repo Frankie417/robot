@@ -1,0 +1,14 @@
+Failure at 1789889981.006816107
+Exception thrown:Could not find a connection between 'base_link' and 'grasping_frame' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame link0 exists with parent base_link.
+Frame gripper_finger_link2 exists with parent link6.
+Frame grasping_frame exists with parent link6.
+
+Failure at 1789889981.006938420
+Exception thrown:Could not find a connection between 'base_link' and 'grasping_frame' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame link0 exists with parent base_link.
+Frame gripper_finger_link2 exists with parent link6.
+Frame grasping_frame exists with parent link6.
+

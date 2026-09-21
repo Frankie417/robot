@@ -1,0 +1,22 @@
+--- /home/cubertzk/arm2025_ws/src/marm_description/urdf/marm.xacro	2025-10-19 21:46:56.000000000 +0800
++++ /home/cubertzk/arm2025_ws/src/marm_description/urdf/marm_course_variant.xacro	2026-09-20 15:37:54.068476843 +0800
+@@ -198,7 +198,7 @@
+         <parent link="link3"/>
+         <child link="link4"/>
+         <origin xyz="0.0 0.0 -${link3_length}" rpy="0 ${M_PI/2} ${M_PI}" />
+-        <axis xyz="1 0 0" />
++        <axis xyz="-1 0 0" />
+         <limit effort="300" velocity="1" lower="${-M_PI}" upper="${M_PI}" />
+     </joint>
+ 
+--- /home/cubertzk/arm2025_ws/src/marm_description/launch/view_marm.launch	2025-10-19 21:42:40.000000000 +0800
++++ /home/cubertzk/arm2025_ws/src/marm_description/launch/view_marm_course_variant.launch	2026-09-20 15:37:20.780481468 +0800
+@@ -1,7 +1,7 @@
+ <launch>
+     <arg name="model" />
+     <!-- 加载机器人模型参数 -->
+-    <param name="robot_description" command="$(find xacro)/xacro $(find marm_description)/urdf/marm.xacro" />
++    <param name="robot_description" command="$(find xacro)/xacro $(find marm_description)/urdf/marm_course_variant.xacro" />
+ 
+     <!-- 设置GUI参数，显示关节控制插件 -->
+     <param name="use_gui" value="true"/>

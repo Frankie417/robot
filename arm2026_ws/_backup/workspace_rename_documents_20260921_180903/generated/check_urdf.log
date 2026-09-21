@@ -1,0 +1,13 @@
+robot name is: marm
+---------- Successfully Parsed XML ---------------
+root Link: base_link has 1 child(ren)
+    child(1):  link0
+        child(1):  link1
+            child(1):  link2
+                child(1):  link3
+                    child(1):  link4
+                        child(1):  link5
+                            child(1):  link6
+                                child(1):  gripper_finger_link1
+                                child(2):  gripper_finger_link2
+                                child(3):  grasping_frame

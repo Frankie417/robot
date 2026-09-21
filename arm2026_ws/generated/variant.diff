@@ -1,0 +1,11 @@
+--- marm.xacro
++++ marm_course_variant.xacro
+@@ -215,7 +215,7 @@
+         <parent link="link3"/>
+         <child link="link4"/>
+         <origin xyz="0.0 0.0 -${link3_length}" rpy="0 ${M_PI/2} ${M_PI}" />
+-        <axis xyz="1 0 0" />
++        <axis xyz="-1 0 0" />
+         <limit effort="300" velocity="1" lower="${-M_PI}" upper="${M_PI}" />
+     </joint>
+ 

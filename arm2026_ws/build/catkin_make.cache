@@ -1,0 +1,2 @@
+marm_description
+-DCATKIN_DEVEL_PREFIX=/home/cubertzk/arm2026_ws/devel -DCMAKE_INSTALL_PREFIX=/home/cubertzk/arm2026_ws/install -G Unix Makefiles
