@@ -11,7 +11,8 @@ import numpy as np
 # None代表不指定/需要自动生成
 ARM_POSE_DICT = {
     # 零点位置
-    'home': [250, 0, 200, None, np.pi],
+    # Keep the simulator aligned with robot/2.机械臂实验/config.py.
+    'home': [150, 0, 200, None, np.pi],
     # 物块释放点
     'object_release': [0, 185, 30, None, np.pi]
     
@@ -21,6 +22,9 @@ ARM_POSE_DICT = {
 PITCH_PANEL_A = -0.002490
 PITCH_PANEL_B = -0.004985
 PITCH_PANEL_C = 3.048636
+
+# Same end-effector Z correction used by robot/2.机械臂实验.
+Z_ERROR_POLYFIT = (0.0156, -3.2391)
 
 
 ##########################################

@@ -10,6 +10,7 @@ from collections import namedtuple
 import logging
 import pybullet
 import pybullet_data
+from pathlib import Path
 # 自定义库
 from arm5dof_kinematic import Arm5DoFKinematic
 from minimum_jerk import minimum_jerk_plan, minimum_jerk_seq # 轨迹规划算法
@@ -40,7 +41,10 @@ class Arm5DoFPyBullet:
 	# 轨迹执行回调函数执行周期, 几个时间块执行一次
 	trajectory_callback_period = 10
 	
-	def __init__(self, arm_urdf_path=None):
+	def __init__(self, arm_urdf_path=None, connection_mode=None):
+		'''Create the simulator.  ``connection_mode`` is ``pybullet.GUI`` by
+		default; pass ``pybullet.DIRECT`` for a headless/reproducible run.'''
+		self.connection_mode = pybullet.GUI if connection_mode is None else connection_mode
 		# 创建仿真环境
 		self.create_world()
 		# 载入机械臂
@@ -59,7 +63,7 @@ class Arm5DoFPyBullet:
 	def create_world(self):
 		'''创建仿真环境初始化'''
 		# 创建GUI服务器
-		pybullet.connect(pybullet.GUI)
+		pybullet.connect(self.connection_mode)
 		# 配置渲染选项
 		# 载入棋盘格子
 		# 添加额外的文件搜索路径
@@ -69,12 +73,12 @@ class Arm5DoFPyBullet:
 		# 设置重力
 		pybullet.setGravity(0, 0, -9.8)
 		# 开启实时仿真
-		pybullet.setRealTimeSimulation(True)
+		pybullet.setRealTimeSimulation(self.connection_mode == pybullet.GUI)
 	
 	def load_arm(self, arm_urdf_path=None):
 		'''载入机械臂'''
 		if arm_urdf_path is None:
-			arm_urdf_path = "../urdf/arm5dof.urdf"
+			arm_urdf_path = str(Path(__file__).resolve().parent / "urdf" / "arm5dof.urdf")
 		# 机械臂在世界坐标系下的位置, 单位m, 格式[x, y, z]
 		arm_posi = [0, 0, 0]
 		# 机械臂姿态-四元数, 格式 [x, y, z, w]
@@ -195,6 +199,8 @@ class Arm5DoFPyBullet:
 			force=max_force)
 		# 记录目标关节角度
 		self.target_joints_angle_dict[joint_name] = theta
+		if self.connection_mode == pybullet.DIRECT:
+			pybullet.stepSimulation()
 		# 等待
 		if is_wait:
 			self.wait(callback=callback)
@@ -225,6 +231,8 @@ class Arm5DoFPyBullet:
 			targetVelocities=[0]*ctl_joint_num, \
 			positionGains=self.position_gain_list[:ctl_joint_num], \
 			forces=forces)
+		if self.connection_mode == pybullet.DIRECT:
+			pybullet.stepSimulation()
 		# 等待
 		if is_wait:
 			return self.wait(callback=callback)
@@ -399,6 +407,12 @@ class Arm5DoFPyBullet:
 		x, y, z = p_tool
 		x0 = np.sqrt(x**2 + y**2)
 		return PITCH_PANEL_A*x0 + PITCH_PANEL_B*z + PITCH_PANEL_C
+
+	def adjust_tool_posi(self, p_tool:list):
+		'''Apply the same radial Z correction as the physical-arm controller.'''
+		x, y, z = p_tool
+		k, b = Z_ERROR_POLYFIT
+		return [x, y, z + k * np.sqrt(x**2 + y**2) + b]
 	
 	def set_tool_pose(self, tool_posi=None, tool_pitch=None, \
 		tool_roll=np.pi, pose_name=None, is_soft_move=True, T=1.0, \
@@ -415,6 +429,7 @@ class Arm5DoFPyBullet:
 				return False
 		
 		# 自动生成Pitch
+		tool_posi = self.adjust_tool_posi(tool_posi)
 		if tool_pitch is None:
 			tool_pitch = self.auto_gen_pitch(tool_posi)
 		# 逆向运动学
@@ -466,13 +481,15 @@ class Arm5DoFPyBullet:
 		'''等待机械臂运动到目的地'''
 		t_start = time.time()
 		while not self.is_stop():
+			if self.connection_mode == pybullet.DIRECT:
+				pybullet.stepSimulation()
 			t_cur = time.time() 
 			if t_cur - t_start > self.wait_timeout:
 				# 超时
 				return False
 			if callback is not None:
 				callback()
-			time.sleep(0.1)
+			time.sleep(1.0 / 240.0 if self.connection_mode == pybullet.DIRECT else 0.1)
 		return True
 	
 	def stop(self):
@@ -486,3 +503,8 @@ class Arm5DoFPyBullet:
 		cur_joint_angle = self.get_joint_angle_list()
 		# 设置关节角度为当前的角度
 		self.set_joint_angle_list(cur_joint_angle)
+
+	def close(self):
+		'''Disconnect this simulator instance when the demo is complete.'''
+		if pybullet.isConnected():
+			pybullet.disconnect()
