@@ -90,6 +90,11 @@
 
         <!-- Shoulder housing -->
         <link name="marm_z1_link01">
+            <!-- Rotating bearing neck bridges the 25 mm visual gap above link00.
+                 World Z: neck [0.051,0.085], base cap [0.046,0.054],
+                 shoulder shell [0.079,0.125]. It stays coaxial with joint1. -->
+            <xacro:z1s_visual_cylinder xyz="0 0 -0.012" rpy="0 0 0" radius="0.035" length="0.034" material="Aluminium"/>
+            <xacro:z1s_visual_cylinder xyz="0 0 -0.024" rpy="0 0 0" radius="0.038" length="0.006" material="Graphite"/>
             <xacro:z1s_visual_box xyz="0 0 0.022" rpy="0 0 0" size="0.072 0.068 0.046" material="PearlWhite"/>
             <xacro:z1s_visual_cylinder xyz="0 0 0.010" rpy="0 0 0" radius="0.041" length="0.012" material="Graphite"/>
             <xacro:z1s_visual_cylinder xyz="0 0 0.048" rpy="0 0 0" radius="0.037" length="0.010" material="Aluminium"/>
