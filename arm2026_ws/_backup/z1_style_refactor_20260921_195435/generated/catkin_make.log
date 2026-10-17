@@ -1,0 +1,12 @@
+Built target marm_description_xacro_generated_to_devel_space_
+Base path: /home/cubertzk/arm2026_ws
+Source space: /home/cubertzk/arm2026_ws/src
+Build space: /home/cubertzk/arm2026_ws/build
+Devel space: /home/cubertzk/arm2026_ws/devel
+Install space: /home/cubertzk/arm2026_ws/install
+####
+#### Running command: "make cmake_check_build_system" in "/home/cubertzk/arm2026_ws/build"
+####
+####
+#### Running command: "make -j14 -l14" in "/home/cubertzk/arm2026_ws/build"
+####

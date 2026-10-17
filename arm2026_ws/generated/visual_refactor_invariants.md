@@ -2,7 +2,7 @@
 # Visual Refactor Invariants
 
 - Pre-refactor visual elements: **10**
-- Post-refactor visual elements: **53**
+- Post-refactor visual elements: **68**
 - Links: **11 → 11**
 - Joints: **10 → 10**
 - Collision elements: **9 → 9**

@@ -5,7 +5,7 @@
 - Root link(s): `base_link`
 - Link count: **11**
 - Joint count: **10**
-- Visual element count: **53**
+- Visual element count: **68**
 - Collision element count: **9**
 - Joint types: `fixed` = 3, `prismatic` = 1, `revolute` = 6
 - Single connected tree: **yes**

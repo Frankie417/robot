@@ -23,6 +23,6 @@ source ~/arm2026_ws/devel/setup.bash
 roslaunch marm_description view_marm.launch
 ```
 
-实际模型包含 11 个 link、10 个 joint，其中 6 个 revolute、1 个 prismatic、3 个 fixed。视觉重构第一阶段将 10 个 visual 增至 42 个；平行夹爪二次外观重构后为 48 个；箱式主臂与腕部壳体重构后最终为 53 个 visual。完整结构见 `~/arm2026_ws/generated/model_structure.md`。
+实际模型包含 11 个 link、10 个 joint，其中 6 个 revolute、1 个 prismatic、3 个 fixed。视觉重构第一阶段将 10 个 visual 增至 42 个；平行夹爪二次外观重构后为 48 个；箱式主臂与腕部壳体重构后为 53 个；参考 Unitree Z1 模块化关节壳与法兰层次后，当前最终为 68 个 visual。完整结构见 `~/arm2026_ws/generated/model_structure.md`；官方参考包位于 `~/arm2026_ws/_reference/unitree_z1_ros_official_noetic/`。
 
 真实 URDF 离线渲染预览见 `~/arm2026_ws/report_assets/marm_visual_refactor_preview.png`，夹爪近景见 `~/arm2026_ws/report_assets/marm_gripper_parallel_jaw_detail.png`；两者均由展开 URDF 的 geometry、visual origin、material 与 FK 渲染，并非 RViz 截图。

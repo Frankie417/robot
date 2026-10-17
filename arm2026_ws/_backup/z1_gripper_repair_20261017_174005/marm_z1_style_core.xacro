@@ -1,0 +1,241 @@
+<?xml version="1.0"?>
+<robot name="marm_z1_style_core" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <!-- Z1-inspired visual language, using the current project's palette and primitives. -->
+    <material name="Graphite"><color rgba="0.055 0.070 0.085 1"/></material>
+    <material name="Gunmetal"><color rgba="0.16 0.19 0.22 1"/></material>
+    <material name="PearlWhite"><color rgba="0.88 0.91 0.93 1"/></material>
+    <material name="Aluminium"><color rgba="0.52 0.58 0.62 1"/></material>
+    <material name="OceanBlue"><color rgba="0.02 0.30 0.52 1"/></material>
+    <material name="ElectricCyan"><color rgba="0.00 0.72 0.82 1"/></material>
+    <material name="SafetyOrange"><color rgba="1.00 0.30 0.035 1"/></material>
+    <material name="SignalYellow"><color rgba="1.00 0.73 0.06 1"/></material>
+    <material name="RubberBlack"><color rgba="0.018 0.022 0.026 1"/></material>
+
+    <xacro:property name="PI" value="3.1415926535897931"/>
+    <xacro:property name="base_height" value="0.050"/>
+    <xacro:property name="motor_radius" value="0.033"/>
+    <xacro:property name="motor_length" value="0.050"/>
+    <xacro:property name="link2_length" value="0.300"/>
+    <xacro:property name="link3_length" value="0.190"/>
+    <xacro:property name="wrist1_length" value="0.070"/>
+    <xacro:property name="wrist2_length" value="0.052"/>
+    <xacro:property name="flange_length" value="0.050"/>
+
+    <xacro:macro name="z1s_visual_box" params="xyz rpy size material">
+        <visual>
+            <origin xyz="${xyz}" rpy="${rpy}"/>
+            <geometry><box size="${size}"/></geometry>
+            <material name="${material}"/>
+        </visual>
+    </xacro:macro>
+
+    <xacro:macro name="z1s_visual_cylinder" params="xyz rpy radius length material">
+        <visual>
+            <origin xyz="${xyz}" rpy="${rpy}"/>
+            <geometry><cylinder radius="${radius}" length="${length}"/></geometry>
+            <material name="${material}"/>
+        </visual>
+    </xacro:macro>
+
+    <xacro:macro name="z1s_cylinder_inertia" params="m r h">
+        <inertial>
+            <mass value="${m}"/>
+            <inertia ixx="${m*(3*r*r+h*h)/12}" ixy="0" ixz="0"
+                     iyy="${m*(3*r*r+h*h)/12}" iyz="0" izz="${m*r*r/2}"/>
+        </inertial>
+    </xacro:macro>
+
+    <xacro:macro name="z1s_box_inertia" params="m x y z">
+        <inertial>
+            <mass value="${m}"/>
+            <inertia ixx="${m*(y*y+z*z)/12}" ixy="0" ixz="0"
+                     iyy="${m*(x*x+z*z)/12}" iyz="0" izz="${m*(x*x+y*y)/12}"/>
+        </inertial>
+    </xacro:macro>
+
+    <xacro:macro name="marm_z1_style_model" params="joint4_axis">
+        <!-- Base and shoulder motor module -->
+        <link name="marm_z1_base_link">
+            <xacro:z1s_visual_cylinder xyz="0 0 -0.006" rpy="0 0 0" radius="0.074" length="0.012" material="RubberBlack"/>
+            <xacro:z1s_visual_cylinder xyz="0 0 0.004" rpy="0 0 0" radius="0.068" length="0.014" material="Gunmetal"/>
+            <xacro:z1s_visual_cylinder xyz="0 0 0.015" rpy="0 0 0" radius="0.060" length="0.008" material="Aluminium"/>
+            <xacro:z1s_visual_cylinder xyz="0 0 0.022" rpy="0 0 0" radius="0.048" length="0.006" material="ElectricCyan"/>
+        </link>
+
+        <joint name="marm_z1_base_joint" type="fixed">
+            <origin xyz="0 0 ${base_height/2}" rpy="0 0 0"/>
+            <parent link="marm_z1_base_link"/>
+            <child link="marm_z1_link00"/>
+        </joint>
+
+        <link name="marm_z1_link00">
+            <xacro:z1s_visual_cylinder xyz="0 0 0" rpy="0 0 0" radius="0.041" length="0.046" material="PearlWhite"/>
+            <xacro:z1s_visual_cylinder xyz="0 0 -0.025" rpy="0 0 0" radius="0.047" length="0.008" material="Graphite"/>
+            <xacro:z1s_visual_cylinder xyz="0 0 0.025" rpy="0 0 0" radius="0.047" length="0.008" material="OceanBlue"/>
+            <xacro:z1s_visual_box xyz="0 0.030 0" rpy="0 0 0" size="0.052 0.028 0.052" material="Gunmetal"/>
+            <xacro:z1s_visual_box xyz="0 0.046 0" rpy="0 0 0" size="0.024 0.008 0.036" material="SafetyOrange"/>
+            <xacro:z1s_visual_box xyz="0 -0.031 0.018" rpy="0 0 0" size="0.044 0.008 0.010" material="Aluminium"/>
+            <collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><cylinder radius="0.033" length="0.050"/></geometry></collision>
+            <xacro:z1s_cylinder_inertia m="0.48" r="0.033" h="0.050"/>
+        </link>
+
+        <joint name="marm_z1_joint1" type="revolute">
+            <origin xyz="0 0 0.055" rpy="0 0 0"/>
+            <parent link="marm_z1_link00"/>
+            <child link="marm_z1_link01"/>
+            <axis xyz="0 0 1"/>
+            <limit effort="30" velocity="3.14" lower="-2.61799" upper="2.61799"/>
+        </joint>
+
+        <!-- Shoulder housing -->
+        <link name="marm_z1_link01">
+            <xacro:z1s_visual_box xyz="0 0 0.022" rpy="0 0 0" size="0.072 0.068 0.046" material="PearlWhite"/>
+            <xacro:z1s_visual_cylinder xyz="0 0 0.010" rpy="0 0 0" radius="0.041" length="0.012" material="Graphite"/>
+            <xacro:z1s_visual_cylinder xyz="0 0 0.048" rpy="0 0 0" radius="0.037" length="0.010" material="Aluminium"/>
+            <xacro:z1s_visual_box xyz="0 -0.039 0.026" rpy="0 0 0" size="0.046 0.008 0.030" material="OceanBlue"/>
+            <xacro:z1s_visual_box xyz="0 0.040 0.040" rpy="0 0 0" size="0.036 0.008 0.012" material="SafetyOrange"/>
+            <collision><origin xyz="0 0 0.022" rpy="0 0 0"/><geometry><box size="0.060 0.060 0.045"/></geometry></collision>
+            <xacro:z1s_box_inertia m="0.62" x="0.060" y="0.060" z="0.045"/>
+        </link>
+
+        <joint name="marm_z1_joint2" type="revolute">
+            <origin xyz="0 0 0.050" rpy="0 0 0"/>
+            <parent link="marm_z1_link01"/>
+            <child link="marm_z1_link02"/>
+            <axis xyz="0 1 0"/>
+            <limit effort="60" velocity="3.14" lower="0" upper="2.96706"/>
+        </joint>
+
+        <!-- Long offset upper arm, with exposed side rails like the Z1 silhouette -->
+        <link name="marm_z1_link02">
+            <xacro:z1s_visual_box xyz="-${link2_length/2} 0 0" rpy="0 0 0" size="${link2_length} 0.050 0.050" material="PearlWhite"/>
+            <xacro:z1s_visual_box xyz="-${link2_length/2} -0.030 0.016" rpy="0 0 0" size="0.260 0.008 0.020" material="Gunmetal"/>
+            <xacro:z1s_visual_box xyz="-${link2_length/2} 0.030 -0.016" rpy="0 0 0" size="0.230 0.008 0.018" material="OceanBlue"/>
+            <xacro:z1s_visual_box xyz="-${link2_length/2} -0.036 -0.002" rpy="0 0 0" size="0.190 0.006 0.010" material="SafetyOrange"/>
+            <xacro:z1s_visual_cylinder xyz="-0.025 0 0" rpy="${PI/2} 0 0" radius="0.039" length="0.020" material="Graphite"/>
+            <xacro:z1s_visual_cylinder xyz="-${link2_length-0.010} 0 0" rpy="${PI/2} 0 0" radius="0.039" length="0.020" material="Aluminium"/>
+            <collision><origin xyz="-${link2_length/2} 0 0" rpy="0 ${PI/2} 0"/><geometry><cylinder radius="0.023" length="${link2_length}"/></geometry></collision>
+            <xacro:z1s_cylinder_inertia m="1.18" r="0.023" h="${link2_length}"/>
+        </link>
+
+        <joint name="marm_z1_joint3" type="revolute">
+            <origin xyz="-${link2_length} 0 0" rpy="0 0 0"/>
+            <parent link="marm_z1_link02"/>
+            <child link="marm_z1_link03"/>
+            <axis xyz="0 1 0"/>
+            <limit effort="30" velocity="3.14" lower="-2.87979" upper="0"/>
+        </joint>
+
+        <!-- Return arm and elbow motor shell -->
+        <link name="marm_z1_link03">
+            <xacro:z1s_visual_box xyz="${link3_length/2} 0 0.050" rpy="0 0 0" size="${link3_length} 0.046 0.046" material="OceanBlue"/>
+            <xacro:z1s_visual_box xyz="${link3_length/2} -0.029 0.066" rpy="0 0 0" size="0.150 0.008 0.018" material="PearlWhite"/>
+            <xacro:z1s_visual_box xyz="${link3_length/2} 0.030 0.035" rpy="0 0 0" size="0.125 0.008 0.018" material="Gunmetal"/>
+            <xacro:z1s_visual_box xyz="${link3_length/2} 0.037 0.053" rpy="0 0 0" size="0.095 0.006 0.010" material="SignalYellow"/>
+            <xacro:z1s_visual_cylinder xyz="0.026 0 0.050" rpy="${PI/2} 0 0" radius="0.034" length="0.018" material="Aluminium"/>
+            <xacro:z1s_visual_cylinder xyz="${link3_length-0.010} 0 0.050" rpy="${PI/2} 0 0" radius="0.036" length="0.022" material="Graphite"/>
+            <collision><origin xyz="${link3_length/2} 0 0.050" rpy="0 ${PI/2} 0"/><geometry><cylinder radius="0.020" length="${link3_length}"/></geometry></collision>
+            <xacro:z1s_cylinder_inertia m="0.82" r="0.020" h="${link3_length}"/>
+        </link>
+
+        <joint name="marm_z1_joint4" type="revolute">
+            <origin xyz="${link3_length} 0 0.050" rpy="0 0 0"/>
+            <parent link="marm_z1_link03"/>
+            <child link="marm_z1_link04"/>
+            <axis xyz="${joint4_axis}"/>
+            <limit effort="30" velocity="3.14" lower="-1.51844" upper="1.51844"/>
+        </joint>
+
+        <!-- Three compact wrist modules -->
+        <link name="marm_z1_link04">
+            <xacro:z1s_visual_box xyz="${wrist1_length/2} 0 0" rpy="0 0 0" size="${wrist1_length} 0.050 0.050" material="PearlWhite"/>
+            <xacro:z1s_visual_cylinder xyz="0.014 0 0" rpy="0 ${PI/2} 0" radius="0.034" length="0.018" material="SafetyOrange"/>
+            <xacro:z1s_visual_cylinder xyz="0.058 0 0" rpy="0 ${PI/2} 0" radius="0.033" length="0.018" material="Aluminium"/>
+            <xacro:z1s_visual_box xyz="${wrist1_length/2} 0.030 0" rpy="0 0 0" size="0.042 0.008 0.026" material="Gunmetal"/>
+            <xacro:z1s_visual_box xyz="${wrist1_length/2} -0.030 0" rpy="0 0 0" size="0.034 0.006 0.016" material="ElectricCyan"/>
+            <collision><origin xyz="${wrist1_length/2} 0 0" rpy="0 ${PI/2} 0"/><geometry><cylinder radius="0.026" length="${wrist1_length}"/></geometry></collision>
+            <xacro:z1s_cylinder_inertia m="0.55" r="0.026" h="${wrist1_length}"/>
+        </link>
+
+        <joint name="marm_z1_joint5" type="revolute">
+            <origin xyz="${wrist1_length} 0 0" rpy="0 0 0"/>
+            <parent link="marm_z1_link04"/>
+            <child link="marm_z1_link05"/>
+            <axis xyz="0 0 1"/>
+            <limit effort="30" velocity="3.14" lower="-1.34390" upper="1.34390"/>
+        </joint>
+
+        <link name="marm_z1_link05">
+            <xacro:z1s_visual_box xyz="${wrist2_length/2} 0 0" rpy="0 0 0" size="${wrist2_length} 0.046 0.046" material="OceanBlue"/>
+            <xacro:z1s_visual_cylinder xyz="0.012 0 0" rpy="0 ${PI/2} 0" radius="0.031" length="0.016" material="Graphite"/>
+            <xacro:z1s_visual_cylinder xyz="0.043 0 0" rpy="0 ${PI/2} 0" radius="0.030" length="0.016" material="Aluminium"/>
+            <xacro:z1s_visual_box xyz="${wrist2_length/2} 0 0.028" rpy="0 0 0" size="0.034 0.032 0.008" material="SafetyOrange"/>
+            <collision><origin xyz="${wrist2_length/2} 0 0" rpy="0 ${PI/2} 0"/><geometry><cylinder radius="0.024" length="${wrist2_length}"/></geometry></collision>
+            <xacro:z1s_cylinder_inertia m="0.40" r="0.024" h="${wrist2_length}"/>
+        </link>
+
+        <joint name="marm_z1_joint6" type="revolute">
+            <origin xyz="${wrist2_length} 0 0" rpy="0 0 0"/>
+            <parent link="marm_z1_link05"/>
+            <child link="marm_z1_link06"/>
+            <axis xyz="1 0 0"/>
+            <limit effort="30" velocity="3.14" lower="-2.79253" upper="2.79253"/>
+        </joint>
+
+        <link name="marm_z1_link06">
+            <xacro:z1s_visual_cylinder xyz="${flange_length/2} 0 0" rpy="0 ${PI/2} 0" radius="0.030" length="${flange_length}" material="Gunmetal"/>
+            <xacro:z1s_visual_cylinder xyz="0.010 0 0" rpy="0 ${PI/2} 0" radius="0.039" length="0.010" material="Aluminium"/>
+            <xacro:z1s_visual_cylinder xyz="0.025 0 0" rpy="0 ${PI/2} 0" radius="0.039" length="0.008" material="Graphite"/>
+            <xacro:z1s_visual_box xyz="0.043 0 0" rpy="0 0 0" size="0.016 0.060 0.044" material="PearlWhite"/>
+            <xacro:z1s_visual_box xyz="0.050 0 0.022" rpy="0 0 0" size="0.010 0.040 0.006" material="SafetyOrange"/>
+            <collision><origin xyz="${flange_length/2} 0 0" rpy="0 ${PI/2} 0"/><geometry><cylinder radius="0.026" length="${flange_length}"/></geometry></collision>
+            <xacro:z1s_cylinder_inertia m="0.30" r="0.026" h="${flange_length}"/>
+        </link>
+
+        <!-- Z1-like asymmetric gripper: fixed stator plus one revolute mover. -->
+        <joint name="marm_z1_gripper_stator_joint" type="fixed">
+            <origin xyz="${flange_length} 0 0" rpy="0 0 0"/>
+            <parent link="marm_z1_link06"/>
+            <child link="marm_z1_gripper_stator"/>
+        </joint>
+
+        <link name="marm_z1_gripper_stator">
+            <xacro:z1s_visual_cylinder xyz="0.012 0 0" rpy="0 ${PI/2} 0" radius="0.034" length="0.024" material="Aluminium"/>
+            <xacro:z1s_visual_box xyz="0.040 0 0" rpy="0 0 0" size="0.056 0.052 0.040" material="PearlWhite"/>
+            <xacro:z1s_visual_box xyz="0.070 0 0.020" rpy="0 0 0" size="0.050 0.014 0.048" material="Gunmetal"/>
+            <!-- Fixed right jaw; its left X face is the closed contact plane. -->
+            <xacro:z1s_visual_box xyz="0.116 0 0.020" rpy="0 0 0" size="0.026 0.012 0.062" material="OceanBlue"/>
+            <xacro:z1s_visual_box xyz="0.116 -0.008 0.020" rpy="0 0 0" size="0.026 0.005 0.034" material="RubberBlack"/>
+            <xacro:z1s_visual_cylinder xyz="0.040 0 0.026" rpy="${PI/2} 0 0" radius="0.004" length="0.006" material="SafetyOrange"/>
+            <collision><origin xyz="0.082 0 0.020" rpy="0 0 0"/><geometry><box size="0.145 0.040 0.075"/></geometry></collision>
+            <xacro:z1s_box_inertia m="0.52" x="0.090" y="0.040" z="0.050"/>
+        </link>
+
+        <joint name="marm_z1_gripper_joint" type="revolute">
+            <origin xyz="0.055 0 0" rpy="0 0 0"/>
+            <parent link="marm_z1_gripper_stator"/>
+            <child link="marm_z1_gripper_mover"/>
+            <axis xyz="0 1 0"/>
+            <limit effort="30" velocity="3.14" lower="-${PI/2}" upper="0"/>
+        </joint>
+
+        <link name="marm_z1_gripper_mover">
+            <xacro:z1s_visual_cylinder xyz="0 0 0" rpy="${PI/2} 0 0" radius="0.012" length="0.044" material="Graphite"/>
+            <!-- At q=0 this is the left jaw; q<0 rotates it left/up away from the fixed jaw. -->
+            <xacro:z1s_visual_box xyz="0.018 0 0.020" rpy="0 0 0" size="0.040 0.014 0.040" material="Aluminium"/>
+            <xacro:z1s_visual_box xyz="0.035 0 0.020" rpy="0 0 0" size="0.026 0.014 0.058" material="OceanBlue"/>
+            <xacro:z1s_visual_box xyz="0.037 0.008 0.020" rpy="0 0 0" size="0.026 0.005 0.034" material="RubberBlack"/>
+            <xacro:z1s_visual_box xyz="0.018 0 0.042" rpy="0 0 0" size="0.028 0.020 0.006" material="SafetyOrange"/>
+            <collision><origin xyz="0.032 0 0.020" rpy="0 0 0"/><geometry><box size="0.070 0.028 0.052"/></geometry></collision>
+            <xacro:z1s_box_inertia m="0.28" x="0.092" y="0.028" z="0.052"/>
+        </link>
+
+        <link name="marm_z1_grasping_frame"/>
+        <joint name="marm_z1_grasping_frame_joint" type="fixed">
+            <origin xyz="0.120 0 0" rpy="0 0 0"/>
+            <parent link="marm_z1_gripper_stator"/>
+            <child link="marm_z1_grasping_frame"/>
+        </joint>
+    </xacro:macro>
+</robot>

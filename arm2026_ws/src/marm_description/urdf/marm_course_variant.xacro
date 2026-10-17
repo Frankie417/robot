@@ -123,6 +123,8 @@
         <xacro:visual_cylinder xyz="0 0 -0.016" rpy="0 0 0" radius="0.050" length="0.008" material="Graphite"/>
         <xacro:visual_cylinder xyz="0 0 0.016" rpy="0 0 0" radius="0.050" length="0.008" material="OceanBlue"/>
         <xacro:visual_box xyz="0 -0.043 0" rpy="0 0 0" size="0.028 0.006 0.020" material="SafetyOrange"/>
+        <xacro:visual_box xyz="0 0.030 0.004" rpy="0 0 0" size="0.034 0.018 0.026" material="Gunmetal"/>
+        <xacro:visual_box xyz="0 0.030 0.018" rpy="0 0 0" size="0.022 0.006 0.010" material="Aluminium"/>
         <collision>
             <origin xyz="0 0 0" rpy="0 0 0" />
             <geometry>
@@ -143,12 +145,14 @@
     <!-- /////////////////////////////////////   LINK1  ////////////////////////////////////////////// -->
     <link name="link1" >
         <!-- Box-section upper arm: a load-bearing shell rather than a plain round tube. -->
-        <xacro:visual_box xyz="-${link1_length/2} 0 0" rpy="0 0 0" size="0.078 0.052 0.052" material="PearlWhite"/>
+        <xacro:visual_box xyz="-${link1_length/2} 0 0" rpy="0 0 0" size="0.090 0.058 0.058" material="PearlWhite"/>
         <xacro:visual_cylinder xyz="-0.010 0 0" rpy="0 ${M_PI/2} 0" radius="0.038" length="0.020" material="Gunmetal"/>
         <xacro:visual_cylinder xyz="-0.090 0 0" rpy="0 ${M_PI/2} 0" radius="0.035" length="0.020" material="Aluminium"/>
         <xacro:visual_box xyz="-${link1_length/2} -0.026 0.008" rpy="0 0 0" size="0.058 0.008 0.018" material="ElectricCyan"/>
         <xacro:visual_box xyz="-${link1_length/2} 0.026 -0.008" rpy="0 0 0" size="0.042 0.006 0.012" material="SafetyOrange"/>
         <xacro:visual_box xyz="-${link1_length/2} 0.030 0" rpy="0 0 0" size="0.062 0.006 0.034" material="Gunmetal"/>
+        <xacro:visual_box xyz="-${link1_length/2} -0.033 0" rpy="0 0 0" size="0.074 0.006 0.042" material="Aluminium"/>
+        <xacro:visual_box xyz="-0.050 0 0.030" rpy="0 0 0" size="0.062 0.036 0.006" material="Graphite"/>
         <collision>
             <origin xyz="-${link1_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
             <geometry>
@@ -169,12 +173,15 @@
     <!-- ///////////////////////////////////////   LINK2  ////////////////////////////////////////////// -->
     <link name="link2" >
         <!-- Rectangular forearm shell with externally visible longitudinal spine. -->
-        <xacro:visual_box xyz="0 0 ${link2_length/2}" rpy="0 0 0" size="0.052 0.052 0.112" material="PearlWhite"/>
+        <xacro:visual_box xyz="0 0 ${link2_length/2}" rpy="0 0 0" size="0.060 0.060 0.118" material="PearlWhite"/>
         <xacro:visual_cylinder xyz="0 0 0.012" rpy="0 0 0" radius="0.036" length="0.024" material="Gunmetal"/>
         <xacro:visual_cylinder xyz="0 0 0.128" rpy="0 0 0" radius="0.036" length="0.024" material="OceanBlue"/>
+        <xacro:visual_cylinder xyz="0 0 0.006" rpy="0 0 0" radius="0.043" length="0.012" material="Graphite"/>
         <xacro:visual_box xyz="0 -0.027 ${link2_length/2}" rpy="0 0 0" size="0.036 0.009 0.076" material="Aluminium"/>
         <xacro:visual_box xyz="0 -0.033 ${link2_length/2}" rpy="0 0 0" size="0.020 0.004 0.052" material="SafetyOrange"/>
         <xacro:visual_box xyz="0 0.030 ${link2_length/2}" rpy="0 0 0" size="0.038 0.006 0.090" material="Gunmetal"/>
+        <xacro:visual_box xyz="0 -0.034 ${link2_length/2}" rpy="0 0 0" size="0.044 0.006 0.098" material="PearlWhite"/>
+        <xacro:visual_box xyz="0 0 ${link2_length-0.010}" rpy="0 0 0" size="0.046 0.040 0.010" material="Aluminium"/>
 
         <collision>
             <origin xyz="0 0 ${link2_length/2}" rpy="0 0 0" />
@@ -196,12 +203,15 @@
     <!-- /////////////////////////////////   LINK3  ///////////////////////////////////////////////////// -->
     <link name="link3" >
         <!-- Matching box-section return arm; collar cylinders remain the rotating interfaces. -->
-        <xacro:visual_box xyz="0 0 -${link3_length/2}" rpy="0 0 0" size="0.052 0.052 0.120" material="OceanBlue"/>
+        <xacro:visual_box xyz="0 0 -${link3_length/2}" rpy="0 0 0" size="0.060 0.060 0.126" material="OceanBlue"/>
         <xacro:visual_cylinder xyz="0 0 -0.012" rpy="0 0 0" radius="0.036" length="0.024" material="Aluminium"/>
         <xacro:visual_cylinder xyz="0 0 -0.138" rpy="0 0 0" radius="0.036" length="0.024" material="Graphite"/>
+        <xacro:visual_cylinder xyz="0 0 -0.006" rpy="0 0 0" radius="0.043" length="0.012" material="Gunmetal"/>
         <xacro:visual_box xyz="0 0.027 -${link3_length/2}" rpy="0 0 0" size="0.036 0.009 0.082" material="Gunmetal"/>
         <xacro:visual_box xyz="0 0.033 -${link3_length/2}" rpy="0 0 0" size="0.018 0.004 0.060" material="SignalYellow"/>
         <xacro:visual_box xyz="0 -0.030 -${link3_length/2}" rpy="0 0 0" size="0.038 0.006 0.094" material="PearlWhite"/>
+        <xacro:visual_box xyz="0 -0.034 -${link3_length/2}" rpy="0 0 0" size="0.044 0.006 0.102" material="Aluminium"/>
+        <xacro:visual_box xyz="0 0 -${link3_length-0.010}" rpy="0 0 0" size="0.046 0.040 0.010" material="Graphite"/>
         <collision>
             <origin xyz="0 0 -${link3_length/2}" rpy="0 0 0" />
             <geometry>
@@ -222,11 +232,12 @@
     <!-- ///////////////////////////////////   LINK4  //////////////////////////////////////////////// -->
     <link name="link4" >
         <!-- Compact rectangular wrist housing between the two rotary collars. -->
-        <xacro:visual_box xyz="${link4_length/2} 0 0" rpy="0 0 0" size="0.046 0.050 0.050" material="PearlWhite"/>
+        <xacro:visual_box xyz="${link4_length/2} 0 0" rpy="0 0 0" size="0.052 0.056 0.056" material="PearlWhite"/>
         <xacro:visual_cylinder xyz="0.010 0 0" rpy="0 ${M_PI/2} 0" radius="0.033" length="0.020" material="SafetyOrange"/>
         <xacro:visual_cylinder xyz="0.050 0 0" rpy="0 ${M_PI/2} 0" radius="0.031" length="0.020" material="Aluminium"/>
         <xacro:visual_box xyz="${link4_length/2} -0.024 0" rpy="0 0 0" size="0.026 0.006 0.018" material="ElectricCyan"/>
         <xacro:visual_box xyz="${link4_length/2} 0.028 0" rpy="0 0 0" size="0.026 0.006 0.030" material="Gunmetal"/>
+        <xacro:visual_box xyz="${link4_length/2} 0 -0.030" rpy="0 0 0" size="0.036 0.034 0.006" material="Graphite"/>
         <collision>
             <origin xyz="${link4_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
             <geometry>
@@ -252,6 +263,8 @@
         <xacro:visual_cylinder xyz="0 0 0.050" rpy="0 0 0" radius="0.033" length="0.020" material="Graphite"/>
         <xacro:visual_box xyz="0 -0.025 ${link5_length/2}" rpy="0 0 0" size="0.018 0.006 0.026" material="SafetyOrange"/>
         <xacro:visual_box xyz="0 0.028 ${link5_length/2}" rpy="0 0 0" size="0.030 0.006 0.026" material="Gunmetal"/>
+        <xacro:visual_box xyz="0 -0.030 ${link5_length/2}" rpy="0 0 0" size="0.032 0.006 0.032" material="Aluminium"/>
+        <xacro:visual_box xyz="0 0 ${link5_length-0.006}" rpy="0 0 0" size="0.042 0.040 0.008" material="Graphite"/>
         <collision>
             <origin xyz="0 0 ${link4_length/2} " rpy="0 0 0" />
             <geometry>
@@ -276,6 +289,8 @@
         <xacro:visual_cylinder xyz="0.018 0 0" rpy="0 ${M_PI/2} 0" radius="0.044" length="0.008" material="Graphite"/>
         <xacro:visual_box xyz="0.027 0 0" rpy="0 0 0" size="0.018 0.072 0.058" material="Gunmetal"/>
         <xacro:visual_box xyz="0.037 0 0.025" rpy="0 0 0" size="0.018 0.050 0.008" material="SafetyOrange"/>
+        <xacro:visual_box xyz="0.035 0 0" rpy="0 0 0" size="0.020 0.082 0.048" material="PearlWhite"/>
+        <xacro:visual_box xyz="0.046 0 0" rpy="0 0 0" size="0.008 0.054 0.032" material="Gunmetal"/>
         <collision>
             <origin xyz="${link6_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
             <geometry>

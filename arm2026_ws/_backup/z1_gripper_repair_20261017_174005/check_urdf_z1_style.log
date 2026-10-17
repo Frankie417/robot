@@ -1,0 +1,13 @@
+robot name is: marm_z1_style
+---------- Successfully Parsed XML ---------------
+root Link: marm_z1_base_link has 1 child(ren)
+    child(1):  marm_z1_link00
+        child(1):  marm_z1_link01
+            child(1):  marm_z1_link02
+                child(1):  marm_z1_link03
+                    child(1):  marm_z1_link04
+                        child(1):  marm_z1_link05
+                            child(1):  marm_z1_link06
+                                child(1):  marm_z1_gripper_stator
+                                    child(1):  marm_z1_grasping_frame
+                                    child(2):  marm_z1_gripper_mover

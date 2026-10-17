@@ -1,0 +1,7 @@
+<launch>
+    <param name="robot_description" command="$(find xacro)/xacro $(find marm_description)/urdf/marm_z1_style_course_variant.xacro" />
+    <param name="use_gui" value="true"/>
+    <node name="marm_z1_style_course_joint_state_publisher_gui" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" />
+    <node name="marm_z1_style_course_robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+    <node name="marm_z1_style_course_rviz" pkg="rviz" type="rviz" args="-d $(find marm_description)/urdf_z1_style.rviz" required="true" />
+</launch>

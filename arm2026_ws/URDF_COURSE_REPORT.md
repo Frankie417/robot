@@ -2,7 +2,7 @@
 
 在 ROS1 中导入并验证 `marm_description`，掌握 Xacro/URDF 的 link、joint、parent/child、origin、axis、limit，完成编译、结构检查、Graphviz 图、RViz/TF 运行验证及一次可回滚的单参数修改。
 
-本次在不改变运动学、碰撞或惯性语义的前提下重构了视觉层：第一阶段将 10 个 visual 部件扩展为 42 个；之后将原先像插座的夹爪替换为镜像的工业平行两指夹爪；最后将上臂、前臂和腕部由圆管主体改为箱式承力壳与外露侧梁，最终为 53 个 visual 部件。整个模型仍只使用 box、cylinder 等基础几何体，没有引入外部 STL/DAE。
+本次在不改变运动学、碰撞或惯性语义的前提下重构了视觉层：第一阶段将 10 个 visual 部件扩展为 42 个；之后将原先像插座的夹爪替换为镜像的工业平行两指夹爪；再将上臂、前臂和腕部由圆管主体改为箱式承力壳与外露侧梁；最后参考 Unitree Z1 的模块化关节壳、端环和法兰层次，当前为 68 个 visual 部件。整个模型仍只使用 box、cylinder 等基础几何体，没有在本模型中引入外部 STL/DAE。
 
 # 2. 实验环境
 
@@ -93,7 +93,7 @@ xacro ~/arm2026_ws/src/marm_description/urdf/marm.xacro \
 check_urdf ~/arm2026_ws/generated/marm.urdf
 ```
 
-最终主模型与课程修改版都通过 `check_urdf`，根 link 均为 `base_link`。最终计数为 11 links、10 joints、53 visuals、9 collisions；详见 `generated/check_urdf*.log` 与 `generated/model_structure.md`。
+最终主模型与课程修改版都通过 `check_urdf`，根 link 均为 `base_link`。当前计数为 11 links、10 joints、68 visuals、9 collisions；详见 `generated/check_urdf*.log` 与 `generated/model_structure.md`。
 
 # 9. urdf_to_graphiz 结构图
 
