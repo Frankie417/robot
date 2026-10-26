@@ -1,0 +1,2 @@
+{"time": "2026-10-26T10:38:55.038346", "event": "send", "command": "stop", "transport": "local_simulation"}
+{"time": "2026-10-26T10:52:16.161905", "event": "send", "command": "stop", "transport": "local_simulation"}

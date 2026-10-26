@@ -1,0 +1,22 @@
+{
+  "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+  "executable": "D:\\robot\\5.目标识别\\.venv-gesture\\Scripts\\python.exe",
+  "platform": "Windows-10-10.0.26200-SP0",
+  "opencv": "4.11.0",
+  "mediapipe": "0.10.21",
+  "numpy": "1.26.4",
+  "model_bytes": 8373440,
+  "model_sha256": "97952348cf6a6a4915c2ea1496b4b37ebabc50cbbf80571435643c455f2b0482",
+  "ports": [],
+  "blank_image_label": "无手",
+  "camera": {
+    "opened": true,
+    "frames": 10,
+    "shape": [
+      480,
+      640,
+      3
+    ],
+    "mean_inference_ms": 20.3
+  }
+}

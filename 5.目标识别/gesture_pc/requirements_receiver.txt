@@ -1,0 +1,2 @@
+# Only needed on the lab receiver. Real hardware also uses its existing SDK dependencies.
+pyserial==3.5
