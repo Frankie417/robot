@@ -1,0 +1,144 @@
+{
+  "time": "2026-10-26T15:10:16.995351",
+  "sdk": "D:\\robot\\4.机械臂OpenCV视觉处理实验",
+  "purpose": "Offline diagnostics only; candidate modulo Roll values; no UART connection or movement.",
+  "changes_to_operational_config": false,
+  "physical_calibration_confirmed": false,
+  "reachable_key_poses": [
+    {
+      "color": "red",
+      "stage": "APPROACH",
+      "pose": {
+        "x": 192.2,
+        "y": -11.2,
+        "z": 68.8,
+        "pitch_deg": 132.7,
+        "roll_deg": 144.5
+      },
+      "solutions": 1
+    },
+    {
+      "color": "red",
+      "stage": "PICK",
+      "pose": {
+        "x": 192.2,
+        "y": -11.2,
+        "z": 13.8,
+        "pitch_deg": 132.7,
+        "roll_deg": 144.5
+      },
+      "solutions": 1
+    },
+    {
+      "color": "red",
+      "stage": "TRANSFER_HOME",
+      "pose": {
+        "x": 150.0,
+        "y": 0.0,
+        "z": 200.0,
+        "pitch_deg": 96.1,
+        "roll_deg": 180.0
+      },
+      "solutions": 2
+    },
+    {
+      "color": "red",
+      "stage": "BIN_ABOVE",
+      "pose": {
+        "x": 127.4,
+        "y": -131.8,
+        "z": 161.4,
+        "pitch_deg": 94.5,
+        "roll_deg": 109.0
+      },
+      "solutions": 1
+    },
+    {
+      "color": "red",
+      "stage": "PLACE",
+      "pose": {
+        "x": 127.4,
+        "y": -131.8,
+        "z": 146.4,
+        "pitch_deg": 94.5,
+        "roll_deg": 109.0
+      },
+      "solutions": 1
+    },
+    {
+      "color": "yellow",
+      "stage": "BIN_ABOVE",
+      "pose": {
+        "x": 219.0,
+        "y": 99.8,
+        "z": 150.6,
+        "pitch_deg": 106.5,
+        "roll_deg": 169.9
+      },
+      "solutions": 2
+    },
+    {
+      "color": "yellow",
+      "stage": "PLACE",
+      "pose": {
+        "x": 219.0,
+        "y": 99.8,
+        "z": 135.6,
+        "pitch_deg": 106.5,
+        "roll_deg": 169.9
+      },
+      "solutions": 1
+    },
+    {
+      "color": "green",
+      "stage": "BIN_ABOVE",
+      "pose": {
+        "x": 122.8,
+        "y": 114.8,
+        "z": 137.8,
+        "pitch_deg": 112.7,
+        "roll_deg": 159.6
+      },
+      "solutions": 1
+    },
+    {
+      "color": "green",
+      "stage": "PLACE",
+      "pose": {
+        "x": 122.8,
+        "y": 114.8,
+        "z": 122.8,
+        "pitch_deg": 112.7,
+        "roll_deg": 159.6
+      },
+      "solutions": 1
+    },
+    {
+      "color": "blue",
+      "stage": "BIN_ABOVE",
+      "pose": {
+        "x": 207.8,
+        "y": -141.3,
+        "z": 148.3,
+        "pitch_deg": 104.5,
+        "roll_deg": 169.9
+      },
+      "solutions": 1
+    },
+    {
+      "color": "blue",
+      "stage": "PLACE",
+      "pose": {
+        "x": 207.8,
+        "y": -141.3,
+        "z": 133.3,
+        "pitch_deg": 104.5,
+        "roll_deg": 169.9
+      },
+      "solutions": 1
+    }
+  ],
+  "automated_tests": "12 passed; synthetic images, simulated motion and cancellation. No real camera/arm trial.",
+  "panel_smoke_test": "passed",
+  "python36_syntax_check": "passed"
+}

@@ -1,0 +1,72 @@
+{"time": "2026-10-26T14:10:25.212944", "event": "send", "command": "clear_stop", "transport": "usb_network"}
+{"time": "2026-10-26T14:10:33.297524", "event": "send", "command": "open_gripper", "transport": "usb_network"}
+{"time": "2026-10-26T14:10:34.402685", "event": "result", "command": "open_gripper", "reply": {"id": "4791f014a213460680c45e71a4fa1c78", "status": "done", "command": "open_gripper", "mode": "hardware", "error": null, "stop_phase": "ready"}, "error": null}
+{"time": "2026-10-26T14:10:41.751577", "event": "send", "command": "clear_stop", "transport": "usb_network"}
+{"time": "2026-10-26T14:10:47.558675", "event": "send", "command": "open_gripper", "transport": "usb_network"}
+{"time": "2026-10-26T14:10:48.683684", "event": "result", "command": "open_gripper", "reply": {"id": "d1aa49bc52f544929a52b0000663d483", "status": "done", "command": "open_gripper", "mode": "hardware", "error": null, "stop_phase": "ready"}, "error": null}
+{"time": "2026-10-26T14:10:53.322035", "event": "send", "command": "clear_stop", "transport": "usb_network"}
+{"time": "2026-10-26T14:10:58.898156", "event": "send", "command": "close_gripper", "transport": "usb_network"}
+{"time": "2026-10-26T14:11:00.002773", "event": "result", "command": "close_gripper", "reply": {"id": "21c1e9dc188840c2a4e951090af82902", "status": "done", "command": "close_gripper", "mode": "hardware", "error": null, "stop_phase": "ready"}, "error": null}
+{"time": "2026-10-26T14:11:13.003330", "event": "send", "command": "clear_stop", "transport": "usb_network"}
+{"time": "2026-10-26T14:11:29.127743", "event": "send", "command": "clear_stop", "transport": "usb_network"}
+{"time": "2026-10-26T14:11:34.468183", "event": "send", "command": "home", "transport": "usb_network"}
+{"time": "2026-10-26T14:11:36.666434", "event": "result", "command": "home", "reply": {"id": "ab76224628a442f6805014adda912cf9", "status": "done", "command": "home", "mode": "hardware", "error": null, "stop_phase": "ready"}, "error": null}
+{"time": "2026-10-26T14:11:46.454080", "event": "send", "command": "stop", "transport": "usb_network"}
+{"time": "2026-10-26T14:11:55.870293", "event": "send", "command": "clear_stop", "transport": "usb_network"}
+{"time": "2026-10-26T14:11:59.601974", "event": "send", "command": "home", "transport": "usb_network"}
+{"time": "2026-10-26T14:12:01.767389", "event": "result", "command": "home", "reply": {"id": "fd1ee1b36e2d4a2592ac073951867ac5", "status": "done", "command": "home", "mode": "hardware", "error": null, "stop_phase": "ready"}, "error": null}
+{"time": "2026-10-26T14:12:10.198968", "event": "send", "command": "clear_stop", "transport": "usb_network"}
+{"time": "2026-10-26T14:12:16.784644", "event": "send", "command": "home", "transport": "usb_network"}
+{"time": "2026-10-26T14:12:18.950449", "event": "result", "command": "home", "reply": {"id": "53b5dc6bd05c49a5a5768f79645655e4", "status": "done", "command": "home", "mode": "hardware", "error": null, "stop_phase": "ready"}, "error": null}
+{"time": "2026-10-26T14:12:26.913076", "event": "send", "command": "stop", "transport": "usb_network"}
+{"time": "2026-10-26T14:16:30.063276", "event": "send", "command": "clear_stop", "transport": "usb_network"}
+{"time": "2026-10-26T14:16:33.855579", "event": "send", "command": "open_gripper", "transport": "usb_network"}
+{"time": "2026-10-26T14:16:35.032097", "event": "result", "command": "open_gripper", "reply": {"id": "f2a2752f9d2d418a8685e79a81b1f5ad", "status": "done", "command": "open_gripper", "mode": "hardware", "error": null, "stop_phase": "ready"}, "error": null}
+{"time": "2026-10-26T14:16:37.861868", "event": "send", "command": "clear_stop", "transport": "usb_network"}
+{"time": "2026-10-26T14:16:41.851794", "event": "send", "command": "close_gripper", "transport": "usb_network"}
+{"time": "2026-10-26T14:16:42.996365", "event": "result", "command": "close_gripper", "reply": {"id": "107d400fcbfb4be5a97bf42f5a8dd878", "status": "done", "command": "close_gripper", "mode": "hardware", "error": null, "stop_phase": "ready"}, "error": null}
+{"time": "2026-10-26T14:16:52.861186", "event": "send", "command": "clear_stop", "transport": "usb_network"}
+{"time": "2026-10-26T14:16:59.368738", "event": "send", "command": "home", "transport": "usb_network"}
+{"time": "2026-10-26T14:17:01.571553", "event": "result", "command": "home", "reply": {"id": "9b3b02012a21434fae4fc2379b5af8c1", "status": "done", "command": "home", "mode": "hardware", "error": null, "stop_phase": "ready"}, "error": null}
+{"time": "2026-10-26T14:17:11.826451", "event": "send", "command": "clear_stop", "transport": "usb_network"}
+{"time": "2026-10-26T14:17:16.287374", "event": "send", "command": "open_gripper", "transport": "usb_network"}
+{"time": "2026-10-26T14:17:17.359085", "event": "result", "command": "open_gripper", "reply": {"id": "3d58afadc2b647bfa12fd7a3e82a7c4e", "status": "done", "command": "open_gripper", "mode": "hardware", "error": null, "stop_phase": "ready"}, "error": null}
+{"time": "2026-10-26T14:17:19.159258", "event": "send", "command": "clear_stop", "transport": "usb_network"}
+{"time": "2026-10-26T14:17:35.776061", "event": "send", "command": "clear_stop", "transport": "usb_network"}
+{"time": "2026-10-26T14:17:36.481508", "event": "send", "command": "clear_stop", "transport": "usb_network"}
+{"time": "2026-10-26T14:17:39.645372", "event": "send", "command": "close_gripper", "transport": "usb_network"}
+{"time": "2026-10-26T14:17:40.765184", "event": "result", "command": "close_gripper", "reply": {"id": "518301bb595745739fc2def18b59a294", "status": "done", "command": "close_gripper", "mode": "hardware", "error": null, "stop_phase": "ready"}, "error": null}
+{"time": "2026-10-26T14:17:48.435505", "event": "send", "command": "clear_stop", "transport": "usb_network"}
+{"time": "2026-10-26T14:18:12.786723", "event": "send", "command": "clear_stop", "transport": "usb_network"}
+{"time": "2026-10-26T14:18:40.300352", "event": "send", "command": "home", "transport": "usb_network"}
+{"time": "2026-10-26T14:18:42.502493", "event": "result", "command": "home", "reply": {"id": "d731ca6354c54cc4bf672ff5ce064ee5", "status": "done", "command": "home", "mode": "hardware", "error": null, "stop_phase": "ready"}, "error": null}
+{"time": "2026-10-26T14:18:51.032552", "event": "send", "command": "clear_stop", "transport": "usb_network"}
+{"time": "2026-10-26T14:18:57.399385", "event": "send", "command": "open_gripper", "transport": "usb_network"}
+{"time": "2026-10-26T14:18:58.532599", "event": "result", "command": "open_gripper", "reply": {"id": "5507c8a2a97a49998aa9240a70e26d16", "status": "done", "command": "open_gripper", "mode": "hardware", "error": null, "stop_phase": "ready"}, "error": null}
+{"time": "2026-10-26T14:19:01.488942", "event": "send", "command": "clear_stop", "transport": "usb_network"}
+{"time": "2026-10-26T14:19:12.709579", "event": "send", "command": "clear_stop", "transport": "usb_network"}
+{"time": "2026-10-26T14:19:16.983558", "event": "send", "command": "close_gripper", "transport": "usb_network"}
+{"time": "2026-10-26T14:19:18.192869", "event": "result", "command": "close_gripper", "reply": {"id": "cce8e295c90341649b4a77b2c5d24299", "status": "done", "command": "close_gripper", "mode": "hardware", "error": null, "stop_phase": "ready"}, "error": null}
+{"time": "2026-10-26T14:20:38.512554", "event": "send", "command": "clear_stop", "transport": "usb_network"}
+{"time": "2026-10-26T14:20:50.734451", "event": "send", "command": "home", "transport": "usb_network"}
+{"time": "2026-10-26T14:20:52.913487", "event": "result", "command": "home", "reply": {"id": "9f6dd082163c4575b87045767855b4a7", "status": "done", "command": "home", "mode": "hardware", "error": null, "stop_phase": "ready"}, "error": null}
+{"time": "2026-10-26T14:21:39.115791", "event": "send", "command": "clear_stop", "transport": "usb_network"}
+{"time": "2026-10-26T14:21:58.328405", "event": "send", "command": "open_gripper", "transport": "usb_network"}
+{"time": "2026-10-26T14:21:59.426774", "event": "result", "command": "open_gripper", "reply": {"id": "c5484e8795c64fa3bd179e0632a735e7", "status": "done", "command": "open_gripper", "mode": "hardware", "error": null, "stop_phase": "ready"}, "error": null}
+{"time": "2026-10-26T14:22:03.080415", "event": "send", "command": "clear_stop", "transport": "usb_network"}
+{"time": "2026-10-26T14:22:09.189678", "event": "send", "command": "open_gripper", "transport": "usb_network"}
+{"time": "2026-10-26T14:22:10.297819", "event": "result", "command": "open_gripper", "reply": {"id": "481bbc35bc1442c9b5b2629b298b7d49", "status": "done", "command": "open_gripper", "mode": "hardware", "error": null, "stop_phase": "ready"}, "error": null}
+{"time": "2026-10-26T14:22:21.322569", "event": "send", "command": "clear_stop", "transport": "usb_network"}
+{"time": "2026-10-26T14:22:24.793702", "event": "send", "command": "close_gripper", "transport": "usb_network"}
+{"time": "2026-10-26T14:22:25.915064", "event": "result", "command": "close_gripper", "reply": {"id": "32f49792afe24f979224a93ad0f14e81", "status": "done", "command": "close_gripper", "mode": "hardware", "error": null, "stop_phase": "ready"}, "error": null}
+{"time": "2026-10-26T14:22:32.653463", "event": "send", "command": "clear_stop", "transport": "usb_network"}
+{"time": "2026-10-26T14:23:15.539827", "event": "send", "command": "clear_stop", "transport": "usb_network"}
+{"time": "2026-10-26T14:23:23.262454", "event": "send", "command": "open_gripper", "transport": "usb_network"}
+{"time": "2026-10-26T14:23:24.373286", "event": "result", "command": "open_gripper", "reply": {"id": "8720d8373fed42f69da82203ad7a1a53", "status": "done", "command": "open_gripper", "mode": "hardware", "error": null, "stop_phase": "ready"}, "error": null}
+{"time": "2026-10-26T14:23:26.788831", "event": "send", "command": "clear_stop", "transport": "usb_network"}
+{"time": "2026-10-26T14:23:33.309898", "event": "send", "command": "close_gripper", "transport": "usb_network"}
+{"time": "2026-10-26T14:23:34.439350", "event": "result", "command": "close_gripper", "reply": {"id": "6ef15dc9e3904c4ea79cc54b03fc1748", "status": "done", "command": "close_gripper", "mode": "hardware", "error": null, "stop_phase": "ready"}, "error": null}
+{"time": "2026-10-26T14:23:36.939900", "event": "send", "command": "clear_stop", "transport": "usb_network"}
+{"time": "2026-10-26T14:23:48.135432", "event": "send", "command": "home", "transport": "usb_network"}
+{"time": "2026-10-26T14:23:50.332433", "event": "result", "command": "home", "reply": {"id": "9660d9bd58b7455d8a137333a68638cc", "status": "done", "command": "home", "mode": "hardware", "error": null, "stop_phase": "ready"}, "error": null}
+{"time": "2026-10-26T14:23:52.307817", "event": "send", "command": "clear_stop", "transport": "usb_network"}

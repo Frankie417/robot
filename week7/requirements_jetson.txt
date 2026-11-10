@@ -1,0 +1,5 @@
+# Simulation receiver uses only the Python standard library.
+# Hardware uses the device's existing arm SDK and its matching calibration.
+# Install only missing packages into that same SDK Python environment.
+pyserial==3.5
+numpy>=1.19.5

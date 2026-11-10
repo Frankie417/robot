@@ -1,0 +1,24 @@
+{
+  "logic_tests_passed": 21,
+  "test_hardware": "fake UART/camera; localhost HTTP; no real arm driven",
+  "standalone_notebook_definition_and_ui_smoke_tests": [
+    "week8_jetson.ipynb",
+    "week8_laptop.ipynb"
+  ],
+  "offline_ik_passed": [
+    "pick",
+    "above",
+    "home",
+    "capture_image",
+    "red",
+    "yellow",
+    "green",
+    "blue"
+  ],
+  "original_week6_sha256_unchanged": "4bcdaa8613f9f4a1d91e881f072f2148655908b3659de42c12a8f592a715ce6c",
+  "field_validation_pending": [
+    "real gesture accuracy",
+    "real camera color thresholds",
+    "real pick/place and stop"
+  ]
+}

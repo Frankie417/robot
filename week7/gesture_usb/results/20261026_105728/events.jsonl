@@ -1,0 +1,8 @@
+{"time": "2026-10-26T10:57:51.752007", "event": "send", "command": "stop", "transport": "local_simulation"}
+{"time": "2026-10-26T10:57:55.524528", "event": "send", "command": "stop", "transport": "local_simulation"}
+{"time": "2026-10-26T10:57:57.040718", "event": "send", "command": "stop", "transport": "local_simulation"}
+{"time": "2026-10-26T11:02:20.752168", "event": "send", "command": "stop", "transport": "local_simulation"}
+{"time": "2026-10-26T11:02:32.371606", "event": "send", "command": "stop", "transport": "local_simulation"}
+{"time": "2026-10-26T11:02:35.495543", "event": "send", "command": "stop", "transport": "local_simulation"}
+{"time": "2026-10-26T11:02:36.877097", "event": "send", "command": "stop", "transport": "local_simulation"}
+{"time": "2026-10-26T11:02:37.356180", "event": "send", "command": "stop", "transport": "local_simulation"}

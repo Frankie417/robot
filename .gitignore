@@ -1,3 +1,30 @@
-4.机械臂OpenCV视觉处理实验/output.avi
-/4.机械臂OpenCV视觉处理实验/output.avi
+4.鏈烘鑷侽penCV瑙嗚澶勭悊瀹為獙/output.avi
+/4.鏈烘鑷侽penCV瑙嗚澶勭悊瀹為獙/output.avi
 **/output.avi
+
+# Python environments and generated caches
+**/.venv*/
+**/venv/
+**/env/
+**/__pycache__/
+*.py[cod]
+**/.ipynb_checkpoints/
+**/.pytest_cache/
+**/.mypy_cache/
+**/.ruff_cache/
+
+# Local editor state, scratch work, and runtime output
+.idea/
+week6_fix_tmp/
+**/app_stdout.log
+**/app_stderr.log
+*.tmp
+*.bak
+
+# Duplicate distribution archives and nested extraction copies
+*.zip
+week7/week7/
+**/week6_p4/week6_p4/
+
+# Large experiment recording retained locally (exceeds GitHub's 100 MiB limit)
+5.鐩爣璇嗗埆/week3/11缁刜绗笁绔燺瀹為獙瑙嗛.mp4

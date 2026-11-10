@@ -1,0 +1,22 @@
+打包验证时间：2026-10-26T14:42:42
+Python：3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]
+
+test_hold_uses_measured_positions_and_requires_stability (__main__.HoldTests.test_hold_uses_measured_positions_and_requires_stability) ... ok
+test_sdk_motion_writes_cancel_but_hold_can_override (__main__.HoldTests.test_sdk_motion_writes_cancel_but_hold_can_override) ... ok
+test_duplicate_command_id (__main__.Tests.test_duplicate_command_id) ... ok
+test_five_during_busy_reaches_network_stop (__main__.Tests.test_five_during_busy_reaches_network_stop) ... ok
+test_hold_failure_cannot_be_cleared (__main__.Tests.test_hold_failure_cannot_be_cleared) ... ok
+test_lost_heartbeat_cancels_running_action (__main__.Tests.test_lost_heartbeat_cancels_running_action) ... ok
+test_normal_completion (__main__.Tests.test_normal_completion) ... ok
+test_old_epoch_rejected_after_stop_and_clear (__main__.Tests.test_old_epoch_rejected_after_stop_and_clear) ... ok
+test_stop_preempts_action_without_waiting_for_completion (__main__.Tests.test_stop_preempts_action_without_waiting_for_completion) ... ok
+test_wrong_token (__main__.Tests.test_wrong_token) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 6.189s
+
+OK
+
+退出码：0
+
+该测试使用模拟机械臂和本机回环 HTTP，不代表真实手势准确率或机械臂急停验收。
